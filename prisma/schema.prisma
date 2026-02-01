@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  name       String?
+  createdAt  DateTime @default(now())
+}
+
+model Vehicle {
+  id                     String   @id @default(uuid())
+  vehicleNumber          String   @unique
+  category               String
+  location               String
+  revenueLicenseExpiry   DateTime
+  insuranceExpiry        DateTime
+  notes                  String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  @@index([revenueLicenseExpiry])
+  @@index([insuranceExpiry])
+}
+
+model EmailLog {
+  id         String   @id @default(uuid())
+  to         String
+  subject    String
+  body       String
+  sentAt     DateTime @default(now())
+}

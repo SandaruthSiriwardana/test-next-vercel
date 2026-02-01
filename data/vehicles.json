@@ -1,0 +1,24 @@
+[
+  {
+    "id": "43cae728-bca9-4267-a1b4-a8595b3686f3",
+    "vehicleNumber": "24244",
+    "category": "Bus",
+    "location": "Siyablagaskothuwa",
+    "revenueLicenseExpiry": "2026-02-19T00:00:00.000Z",
+    "insuranceExpiry": "2026-02-20T00:00:00.000Z",
+    "notes": null,
+    "createdAt": "2026-02-01T07:42:13.536Z",
+    "updatedAt": "2026-02-01T07:42:13.536Z"
+  },
+  {
+    "id": "0cd7d537-f354-400a-aff1-29ff370f26cb",
+    "vehicleNumber": "sccc",
+    "category": "Van",
+    "location": "Malkaduwawa",
+    "revenueLicenseExpiry": "2026-02-14T00:00:00.000Z",
+    "insuranceExpiry": "2026-02-20T00:00:00.000Z",
+    "notes": null,
+    "createdAt": "2026-02-01T07:28:58.243Z",
+    "updatedAt": "2026-02-01T07:28:58.243Z"
+  }
+]

@@ -1,0 +1,34 @@
+import { NextResponse } from 'next/server'
+import { prisma } from '../../../../src/lib/prisma'
+import { sendExpiryEmail, renderVehicleExpiryTemplate } from '../../../../src/lib/mail'
+
+const CRON_SECRET = process.env.CRON_SECRET
+
+function authorized(req: Request) {
+  const h = req.headers.get('x-cron-secret')
+  return CRON_SECRET && h === CRON_SECRET
+}
+
+export async function POST(req: Request) {
+  if (!authorized(req)) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
+
+  // Send a monthly summary of expiries this month
+  const start = new Date()
+  start.setDate(1); start.setHours(0,0,0,0)
+  const end = new Date(start); end.setMonth(start.getMonth()+1)
+
+  const vehicles = await prisma.vehicle.findMany({ where: {
+    OR: [
+      { revenueLicenseExpiry: { gte: start, lt: end } },
+      { insuranceExpiry: { gte: start, lt: end } }
+    ]
+  }})
+
+  const lines = vehicles.map(v => `- ${v.vehicleNumber} | ${v.category} | ${v.location} | R:${v.revenueLicenseExpiry.toISOString().slice(0,10)} I:${v.insuranceExpiry.toISOString().slice(0,10)}`)
+  const body = `<h3>Monthly expiry summary</h3><pre>${lines.join('\n')}</pre>`
+  const to = process.env.ADMIN_EMAIL || 'admin@example.com'
+  await sendExpiryEmail(to, 'Monthly expiry summary', body)
+  await prisma.emailLog.create({ data: { to, subject: 'Monthly expiry summary', body } })
+
+  return NextResponse.json({ ok: true, count: vehicles.length })
+}
