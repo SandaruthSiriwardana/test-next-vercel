@@ -1,5 +1,5 @@
 import type { Vehicle } from "@prisma/client"
-import Resend from "resend"
+import { Resend } from "resend"
 import nodemailer from "nodemailer"
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY
