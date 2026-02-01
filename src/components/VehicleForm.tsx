@@ -51,12 +51,12 @@ export default function VehicleForm({ onSaved }: Props) {
   return (
     <form onSubmit={submit} className="space-y-2 max-w-md" aria-live="polite">
       <div>
-        <label className="block text-sm">Vehicle number</label>
-        <input required value={form.vehicleNumber} onChange={e=>setForm({...form, vehicleNumber:e.target.value})} className="w-full p-2 border rounded" />
+        <label htmlFor="vehicleNumber" className="block text-sm">Vehicle number</label>
+        <input id="vehicleNumber" value={form.vehicleNumber} onChange={e=>setForm({...form, vehicleNumber:e.target.value})} className="w-full p-2 border rounded" />
       </div>
       <div>
-        <label className="block text-sm">Category</label>
-        <select value={form.category} onChange={e=>setForm({...form, category:e.target.value})} className="w-full p-2 border rounded">
+        <label htmlFor="category" className="block text-sm">Category</label>
+        <select id="category" value={form.category} onChange={e=>setForm({...form, category:e.target.value})} className="w-full p-2 border rounded">
           <option>Van</option>
           <option>Bike</option>
           <option>Threewheel</option>
@@ -65,8 +65,8 @@ export default function VehicleForm({ onSaved }: Props) {
         </select>
       </div>
       <div>
-        <label className="block text-sm">Location</label>
-        <select value={form.location} onChange={e=>setForm({...form, location:e.target.value})} className="w-full p-2 border rounded">
+        <label htmlFor="location" className="block text-sm">Location</label>
+        <select id="location" value={form.location} onChange={e=>setForm({...form, location:e.target.value})} className="w-full p-2 border rounded">
           <option>Malkaduwawa</option>
           <option>Alawwa</option>
           <option>Polpithigama</option>
@@ -74,12 +74,12 @@ export default function VehicleForm({ onSaved }: Props) {
         </select>
       </div>
       <div>
-        <label className="block text-sm">Revenue license expiry</label>
-        <input required type="date" value={form.revenueLicenseExpiry} onChange={e=>setForm({...form, revenueLicenseExpiry:e.target.value})} className="w-full p-2 border rounded" />
+        <label htmlFor="revenueLicenseExpiry" className="block text-sm">Revenue license expiry</label>
+        <input id="revenueLicenseExpiry" type="date" value={form.revenueLicenseExpiry} onChange={e=>setForm({...form, revenueLicenseExpiry:e.target.value})} className="w-full p-2 border rounded" />
       </div>
       <div>
-        <label className="block text-sm">Insurance expiry</label>
-        <input required type="date" value={form.insuranceExpiry} onChange={e=>setForm({...form, insuranceExpiry:e.target.value})} className="w-full p-2 border rounded" />
+        <label htmlFor="insuranceExpiry" className="block text-sm">Insurance expiry</label>
+        <input id="insuranceExpiry" type="date" value={form.insuranceExpiry} onChange={e=>setForm({...form, insuranceExpiry:e.target.value})} className="w-full p-2 border rounded" />
       </div>
       <div>
         <button type="submit" disabled={loading} className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded disabled:opacity-60" aria-busy={loading}>

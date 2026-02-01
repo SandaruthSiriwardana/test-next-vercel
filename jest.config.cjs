@@ -4,8 +4,17 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  // Limit Jest to the src directory to avoid scanning sibling example projects
+  roots: ['<rootDir>/src'],
+  // Ignore nested example folders and build artifacts that contain their own package.json
+  modulePathIgnorePatterns: ['<rootDir>/vehicle-expiry-system', '<rootDir>/vehicle-insurance-form', '<rootDir>/.next'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
+  },
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.jest.json'
+    }
   },
   moduleNameMapper: {
     '\\.(css|less|sass|scss)$': '<rootDir>/src/__mocks__/styleMock.js',
