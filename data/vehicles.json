@@ -1,5 +1,27 @@
 [
   {
+    "id": "11574b6b-68e2-4dbb-b746-855ee979081d",
+    "vehicleNumber": "hjjf",
+    "category": "Van",
+    "location": "Malkaduwawa",
+    "revenueLicenseExpiry": "2026-02-15T00:00:00.000Z",
+    "insuranceExpiry": "2026-02-22T00:00:00.000Z",
+    "notes": null,
+    "createdAt": "2026-02-01T20:04:25.305Z",
+    "updatedAt": "2026-02-01T20:04:25.305Z"
+  },
+  {
+    "id": "70461b2f-ba40-4e92-9843-fd8f3bfee22b",
+    "vehicleNumber": "hjjf",
+    "category": "Van",
+    "location": "Malkaduwawa",
+    "revenueLicenseExpiry": "2026-02-14T00:00:00.000Z",
+    "insuranceExpiry": "2026-02-28T00:00:00.000Z",
+    "notes": null,
+    "createdAt": "2026-02-01T20:02:10.712Z",
+    "updatedAt": "2026-02-01T20:02:10.712Z"
+  },
+  {
     "id": "2a50f332-cf76-4d2b-9f9c-53adc79eaf35",
     "vehicleNumber": "12233",
     "category": "Bike",
