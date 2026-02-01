@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '../../../../src/lib/prisma'
 import { sendExpiryEmail, renderVehicleExpiryTemplate } from '../../../../src/lib/mail'
 
 const CRON_SECRET = process.env.CRON_SECRET
@@ -17,6 +16,8 @@ export async function POST(req: Request) {
   start.setDate(1); start.setHours(0,0,0,0)
   const end = new Date(start); end.setMonth(start.getMonth()+1)
 
+  // Import prisma at runtime to avoid initializing the PrismaClient during build
+  const { prisma } = await import('../../../../src/lib/prisma')
   const vehicles = await prisma.vehicle.findMany({ where: {
     OR: [
       { revenueLicenseExpiry: { gte: start, lt: end } },
