@@ -1,52 +1,89 @@
-NSDS Vehicle Expiry — Ready for GitHub & Vercel
+# NSDS Vehicle Expiry System
 
-What this repository contains
-- Next.js 14 (App Router) TypeScript app for managing vehicle expiries for New Sagarika Driving School
-- Tailwind CSS UI (mobile-first)
-- Simple filesystem fallback store (no DB required) plus Prisma-ready schema if you opt for Postgres
-- Resend (preferred) with Nodemailer SMTP fallback for sending emails
-- Vercel Cron endpoints: `/api/cron/daily` and `/api/cron/monthly`
+A comprehensive system for managing vehicle revenue licenses and insurance expiries for **New Sagarika Driving School**.
 
-Quick start (local)
-1. Copy environment variables: `cp .env.example .env.local` and edit values.
-2. Install dependencies: `npm install --legacy-peer-deps`
-3. Run dev server: `npm run dev` and open `http://localhost:3000` (or port shown).
+## Features
 
-Notes about persistence and production
-- This repo includes a filesystem-based store (`data/vehicles.json`) used when no `DATABASE_URL` is configured. This is convenient for demos but NOT suitable for production on Vercel (serverless instances are ephemeral).
-- For production use, provision a Postgres database (Vercel Postgres recommended), set `DATABASE_URL`, and run Prisma migrations:
-  - `npx prisma migrate deploy`
-  - `npx ts-node --esm prisma/seed.ts` (optional seed)
+- **Dashboard**: 
+  - View all vehicles and their expiry statuses at a glance.
+  - Color-coded indicators (Green = Safe, Yellow = Warning, Red = Expired).
+  - Add, Edit, and Delete vehicle records.
+- **Automated Notifications**:
+  - Daily Cron Job checks for expired vehicles.
+  - Sends email alerts to the administrator for:
+    - Imminent expiries (90, 30, 7, 1 days remaining).
+    - Expired items (0 days / Today).
+- **Responsive UI**:
+  - Dark mode design inspired by modern development tools.
+  - Fully responsive for Mobile, Tablet, and Desktop.
 
-Environment variables
-Create these in Vercel dashboard or local `.env.local`:
-- DATABASE_URL (optional; set for Postgres in production)
-- RESEND_API_KEY (recommended) — if present Resend is used
-- SMTP_URL (fallback) — e.g. `smtp://user:pass@smtp.example.com:587`
-- SMTP_FROM (optional) — email from address
-- ADMIN_EMAIL — recipient for cron notifications
-- CRON_SECRET — secret value sent in `x-cron-secret` header for cron endpoints
-- NEXTAUTH_URL, NEXTAUTH_SECRET (not required unless enabling auth)
+## Tech Stack
 
-Vercel deployment & Cron Jobs
-1. Import this GitHub repo into Vercel. Set the environment variables above in the Vercel project settings.
-2. Configure two Vercel Cron Jobs (in Vercel dashboard -> Cron Jobs):
-   - Daily job: POST to `https://<your-deployment>/api/cron/daily` every day at 00:05 with header `x-cron-secret: <CRON_SECRET>`.
-   - Monthly job: POST to `https://<your-deployment>/api/cron/monthly` on the 1st of month at 00:10 with the same header.
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Database**: PrismaORM (Supports PostgreSQL / SQLite)
+- **Deployment**: [Vercel](https://vercel.com/)
+- **Email**: Resend (with SMTP fallback)
 
-Preparing to push
-1. Check files and run tests locally: `npm test` (CI runs tests on push).
-2. Commit and push:
-   - git add .
-   - git commit -m "chore: prepare repo for deployment"
-   - git push origin main
+## Getting Started
 
-CI
-- A GitHub Actions workflow is included at `.github/workflows/ci.yml` which runs `npm ci` and `npm test` on push and PR.
+### Prerequisites
 
-Security
-- Protect your `CRON_SECRET` and email API keys. Rotate keys if compromised.
+- Node.js 18+ installed.
+- A Vercel account (for deployment).
 
-If you prefer, I can:
-1) Create the Git commit and push to a repository you provide access to (you must give a remote URL), or
-2) Guide you through the exact git commands to run locally.
+### Local Development
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/SandaruthSiriwardana/test-next-vercel.git
+    cd test-next-vercel
+    ```
+
+2.  **Install dependencies**:
+    ```bash
+    npm install --legacy-peer-deps
+    ```
+
+3.  **Configure Environment Variables**:
+    Copy `.env.example` to `.env.local` and set the following:
+    ```env
+    # Database
+    DATABASE_URL="postgresql://..." # Or use local SQLite for dev
+
+    # Email (Resend Recommended)
+    RESEND_API_KEY="re_..."
+    ADMIN_EMAIL="your-email@example.com"
+    
+    # Cron Security
+    CRON_SECRET="your_random_secret_string"
+    ```
+
+4.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deployment on Vercel
+
+1.  **Push to GitHub**: Ensure your code is pushed to your repository.
+2.  **Import to Vercel**: Connect your GitHub repo in Vercel.
+3.  **Environment Variables**: Add the variables from your `.env.local` to the Project Settings > Environment Variables.
+4.  **Cron Jobs**:
+     - The cron schedule is defined in `vercel.json`.
+     - Vercel automatically detects this configuration upon deployment.
+     - **Default Schedule**: Daily at 02:00 AM Sri Lanka Time (`30 20 * * *` UTC).
+
+## Troubleshooting Emails
+
+If emails are not sending:
+1.  Check the **Vercel Function Logs** for `api/cron/daily`.
+2.  Verify `RESEND_API_KEY` or SMTP settings are correct.
+3.  Ensure the **Cron Job** ran successfully (Status 200).
+4.  Check Spam/Junk folders.
+
+## Credits
+
+Developed by **Sandaruth Siriwardana**.
+Version 0.1.0

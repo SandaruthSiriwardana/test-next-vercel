@@ -26,7 +26,6 @@ export default function Dashboard() {
   const [showForm, setShowForm] = useState(false)
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null)
   const [deleteId, setDeleteId] = useState<string | null>(null)
-  const [currentDate, setCurrentDate] = useState<Date | null>(null)
 
   async function load() {
     const res = await fetch('/api/vehicles')
@@ -35,10 +34,7 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    setCurrentDate(new Date())
     load()
-    const timer = setInterval(() => setCurrentDate(new Date()), 1000)
-    return () => clearInterval(timer)
   }, [])
 
   function handleEdit(v: Vehicle) {
@@ -66,41 +62,11 @@ export default function Dashboard() {
     return r === thisMonth || i === thisMonth
   })
 
-  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
 
   return (
     <div className="space-y-6">
       {/* Date and Time Display */}
-      <div className="bg-gradient-to-r from-[#161b22] to-[#1c2128] rounded-lg border border-[#30363d] shadow-lg p-6">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-4">
-            <div className="bg-[#238636] rounded-lg p-3 shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-white tracking-tight">
-                {currentDate ? dayNames[currentDate.getDay()] : <span className="opacity-0">Loading...</span>}
-              </div>
-              <div className="text-lg text-gray-400 mt-1">
-                {currentDate ? `${monthNames[currentDate.getMonth()]} ${currentDate.getDate()}, ${currentDate.getFullYear()}` : <span className="opacity-0">Date</span>}
-              </div>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-4xl font-bold text-white tracking-tight font-mono">
-              {currentDate ? currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }) : <span className="opacity-0">00:00:00 AM</span>}
-            </div>
-            <div className="text-sm text-gray-400 mt-1">Live Time</div>
-          </div>
-        </div>
-      </div>
-
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-3 ml-auto">
           <button

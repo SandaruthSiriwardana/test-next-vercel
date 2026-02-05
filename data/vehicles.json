@@ -20,5 +20,16 @@
     "notes": null,
     "createdAt": "2026-02-05T15:53:58.177Z",
     "updatedAt": "2026-02-05T15:53:58.177Z"
+  },
+  {
+    "id": "test-vehicle-cron-tomorrow",
+    "vehicleNumber": "TEST-TOMORROW",
+    "category": "Car",
+    "location": "Test Location",
+    "revenueLicenseExpiry": "2026-02-07T00:00:00.000Z",
+    "insuranceExpiry": "2026-02-07T00:00:00.000Z",
+    "notes": "Added for cron testing",
+    "createdAt": "2026-02-06T12:00:00.000Z",
+    "updatedAt": "2026-02-06T12:00:00.000Z"
   }
 ]
