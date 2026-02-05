@@ -13,8 +13,7 @@ export async function sendExpiryEmail(to: string, subject: string, html: string)
       subject,
       html
     })
-    // Log via filesystem store when prisma isn't used
-    try { await import('./store').then(m => m.addEmailLog({ to, subject, body: html })) } catch { }
+    // Log removed
     return
   }
 
@@ -38,7 +37,6 @@ export async function sendExpiryEmail(to: string, subject: string, html: string)
     subject,
     html
   })
-  try { await import('./store').then(m => m.addEmailLog({ to, subject, body: html })) } catch { }
 }
 
 export function renderVehicleExpiryTemplate(v: Vehicle, expiryType: string) {
