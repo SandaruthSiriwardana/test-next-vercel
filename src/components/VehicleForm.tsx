@@ -1,10 +1,12 @@
 "use client"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 type Props = {
   onSaved?: () => void
   initialData?: any
 }
+
+const STANDARD_CATEGORIES = ['Van', 'Bike', 'Threewheel', 'Bus']
 
 export default function VehicleForm({ onSaved, initialData }: Props) {
   const [form, setForm] = useState({
@@ -14,9 +16,29 @@ export default function VehicleForm({ onSaved, initialData }: Props) {
     revenueLicenseExpiry: initialData?.revenueLicenseExpiry ? new Date(initialData.revenueLicenseExpiry).toISOString().split('T')[0] : '',
     insuranceExpiry: initialData?.insuranceExpiry ? new Date(initialData.insuranceExpiry).toISOString().split('T')[0] : ''
   })
+
+  const [isCustomCategory, setIsCustomCategory] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+
+  // Initialize custom state based on existing data
+  useEffect(() => {
+    if (initialData?.category && !STANDARD_CATEGORIES.includes(initialData.category)) {
+      setIsCustomCategory(true)
+    }
+  }, [initialData])
+
+  function handleCategoryChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const val = e.target.value
+    if (val === 'Custom') {
+      setIsCustomCategory(true)
+      setForm(prev => ({ ...prev, category: '' })) // Clear for user input
+    } else {
+      setIsCustomCategory(false)
+      setForm(prev => ({ ...prev, category: val }))
+    }
+  }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault()
@@ -50,6 +72,7 @@ export default function VehicleForm({ onSaved, initialData }: Props) {
       // Clear form on success only if adding new
       if (!initialData) {
         setForm({ vehicleNumber: '', category: 'Van', location: 'Malkaduwawa', revenueLicenseExpiry: '', insuranceExpiry: '' })
+        setIsCustomCategory(false)
       }
       const serverMsg = initialData ? 'Vehicle updated successfully' : (data && typeof data === 'object' && data.id ? `Saved (id: ${String(data.id).slice(0, 6)})` : 'Saved successfully')
       setSuccess(serverMsg)
@@ -78,13 +101,28 @@ export default function VehicleForm({ onSaved, initialData }: Props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="category" className={labelClass}>වර්ගය</label>
-          <select id="category" value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} className={inputClass}>
-            <option>Van</option>
-            <option>Bike</option>
-            <option>Threewheel</option>
-            <option>Bus</option>
-            <option>Custom</option>
-          </select>
+          <div className="space-y-2">
+            <select
+              id="category"
+              value={isCustomCategory ? 'Custom' : form.category}
+              onChange={handleCategoryChange}
+              className={inputClass}
+            >
+              {STANDARD_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+              <option value="Custom">Custom</option>
+            </select>
+
+            {isCustomCategory && (
+              <input
+                type="text"
+                value={form.category}
+                onChange={e => setForm({ ...form, category: e.target.value })}
+                placeholder="Enter custom category"
+                className={`${inputClass} animate-in fade-in zoom-in-95 duration-200 mt-2`}
+                autoFocus
+              />
+            )}
+          </div>
         </div>
         <div>
           <label htmlFor="location" className={labelClass}>ස්ථානය</label>
