@@ -86,9 +86,13 @@ export async function POST(req: Request) {
           let match = false
 
           if (t === 0) {
+            // Sri Lanka Time is UTC+5:30
+            // We want to check if the expiry date matches "today" in SL time
+            const slNow = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Colombo" }))
+            const slNowStr = slNow.toISOString().split('T')[0]
             const expiryStr = expiryDate.toISOString().split('T')[0]
-            const nowStr = now.toISOString().split('T')[0]
-            if (expiryStr === nowStr) match = true
+
+            if (expiryStr === slNowStr) match = true
           } else {
             if (Math.abs(diff - t) < (oneDay / 2)) match = true
           }
