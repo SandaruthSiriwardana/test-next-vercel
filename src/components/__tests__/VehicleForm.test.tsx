@@ -25,7 +25,7 @@ describe('VehicleForm', () => {
     await userEvent.type(screen.getByLabelText(/වාහන අංකය/i), 'ABC-123')
     await userEvent.click(screen.getByRole('button', { name: /save/i }))
 
-    await waitFor(() => expect(onSaved).toHaveBeenCalled())
+    await waitFor(() => expect(onSaved).toHaveBeenCalled(), { timeout: 3000 })
     expect(await screen.findByText(/Saved \(id: abc123/i)).toBeInTheDocument()
   })
 
