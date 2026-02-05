@@ -22,7 +22,6 @@ function formatDate(dateStr: string) {
 
 export default function Dashboard() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([])
-  const [logs, setLogs] = useState<{ id: string; subject: string; sentAt: string }[]>([])
   const [showForm, setShowForm] = useState(false)
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null)
   const [deleteId, setDeleteId] = useState<string | null>(null)
@@ -31,12 +30,6 @@ export default function Dashboard() {
     const res = await fetch('/api/vehicles')
     const data = await res.json()
     setVehicles(data)
-    // Load email logs for quick visibility
-    try {
-      const lres = await fetch('/api/email-logs')
-      const ld = await lres.json()
-      setLogs(ld.slice(0, 10))
-    } catch { }
   }
 
   useEffect(() => { load() }, [])
@@ -225,13 +218,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      <section className="bg-[#161b22] rounded-md border border-[#30363d] p-4 shadow-sm">
-        <h2 className="font-semibold text-gray-100 mb-2">මෑත ඊමේල් වාර්තා</h2>
-        <ul className="text-sm space-y-1">
-          {logs.length === 0 && <li className="text-gray-500 italic">තවම ඊමේල් ක්‍රියාකාරකම් නොමැත</li>}
-          {logs.map(l => <li key={l.id} className="text-gray-400"><span className="text-gray-500">[{new Date(l.sentAt).toLocaleString()}]</span> — <span className="text-gray-300">{l.subject}</span></li>)}
-        </ul>
-      </section>
+
     </div>
   )
 }
