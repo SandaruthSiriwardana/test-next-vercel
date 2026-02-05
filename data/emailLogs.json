@@ -1,1 +1,72 @@
-[]
+[
+  {
+    "id": "34053db1-881b-41b7-8174-ce03adf11c30",
+    "sentAt": "2026-02-05T17:24:09.497Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (insurance)",
+    "body": "\n    <div style=\"font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color: #111\">\n      <h2>New Sagarika Driving School — Vehicle expiry notice</h2>\n      <p>Vehicle: <strong>3321323</strong></p>\n      <p>Category: Van</p>\n      <p>Location: Malkaduwawa</p>\n      <p>Expiry Type: insurance</p>\n      <p>Expiry Date: 2/5/2026</p>\n      <p><a href=\"http://localhost:3000\">Login to NSDS</a></p>\n    </div>\n  "
+  },
+  {
+    "id": "7c918248-0650-4892-ba86-31c0d21ddab8",
+    "sentAt": "2026-02-05T17:24:09.494Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (insurance)",
+    "body": "\n    <div style=\"font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color: #111\">\n      <h2>New Sagarika Driving School — Vehicle expiry notice</h2>\n      <p>Vehicle: <strong>3321323</strong></p>\n      <p>Category: Van</p>\n      <p>Location: Malkaduwawa</p>\n      <p>Expiry Type: insurance</p>\n      <p>Expiry Date: 2/5/2026</p>\n      <p><a href=\"http://localhost:3000\">Login to NSDS</a></p>\n    </div>\n  "
+  },
+  {
+    "id": "89a3de4a-9972-4adc-b700-6135329f17ab",
+    "sentAt": "2026-02-05T17:24:06.323Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (revenue)",
+    "body": "\n    <div style=\"font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color: #111\">\n      <h2>New Sagarika Driving School — Vehicle expiry notice</h2>\n      <p>Vehicle: <strong>3321323</strong></p>\n      <p>Category: Van</p>\n      <p>Location: Malkaduwawa</p>\n      <p>Expiry Type: revenue</p>\n      <p>Expiry Date: 2/5/2026</p>\n      <p><a href=\"http://localhost:3000\">Login to NSDS</a></p>\n    </div>\n  "
+  },
+  {
+    "id": "74729b4e-94a5-4cba-a764-b9e6b529f4f0",
+    "sentAt": "2026-02-05T17:24:06.318Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (revenue)",
+    "body": "\n    <div style=\"font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color: #111\">\n      <h2>New Sagarika Driving School — Vehicle expiry notice</h2>\n      <p>Vehicle: <strong>3321323</strong></p>\n      <p>Category: Van</p>\n      <p>Location: Malkaduwawa</p>\n      <p>Expiry Type: revenue</p>\n      <p>Expiry Date: 2/5/2026</p>\n      <p><a href=\"http://localhost:3000\">Login to NSDS</a></p>\n    </div>\n  "
+  },
+  {
+    "id": "7158b8f0-255b-4170-a954-36ecb4883c29",
+    "sentAt": "2026-02-05T17:18:34.174Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (insurance)",
+    "body": "\n    <div style=\"font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color: #111\">\n      <h2>New Sagarika Driving School — Vehicle expiry notice</h2>\n      <p>Vehicle: <strong>3321323</strong></p>\n      <p>Category: Van</p>\n      <p>Location: Malkaduwawa</p>\n      <p>Expiry Type: insurance</p>\n      <p>Expiry Date: 2/5/2026</p>\n      <p><a href=\"http://localhost:3000\">Login to NSDS</a></p>\n    </div>\n  "
+  },
+  {
+    "id": "af964b4b-1a61-4c47-8103-80b8e1b1a80d",
+    "sentAt": "2026-02-05T17:18:34.171Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (insurance)",
+    "body": "\n    <div style=\"font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color: #111\">\n      <h2>New Sagarika Driving School — Vehicle expiry notice</h2>\n      <p>Vehicle: <strong>3321323</strong></p>\n      <p>Category: Van</p>\n      <p>Location: Malkaduwawa</p>\n      <p>Expiry Type: insurance</p>\n      <p>Expiry Date: 2/5/2026</p>\n      <p><a href=\"http://localhost:3000\">Login to NSDS</a></p>\n    </div>\n  "
+  },
+  {
+    "id": "575dc493-68e1-41fb-9a29-1a9033a330d4",
+    "sentAt": "2026-02-05T17:18:30.641Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (revenue)",
+    "body": "\n    <div style=\"font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color: #111\">\n      <h2>New Sagarika Driving School — Vehicle expiry notice</h2>\n      <p>Vehicle: <strong>3321323</strong></p>\n      <p>Category: Van</p>\n      <p>Location: Malkaduwawa</p>\n      <p>Expiry Type: revenue</p>\n      <p>Expiry Date: 2/5/2026</p>\n      <p><a href=\"http://localhost:3000\">Login to NSDS</a></p>\n    </div>\n  "
+  },
+  {
+    "id": "1456c8dd-458c-4c74-907d-3b391e2cd652",
+    "sentAt": "2026-02-05T17:18:30.636Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (revenue)",
+    "body": "\n    <div style=\"font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color: #111\">\n      <h2>New Sagarika Driving School — Vehicle expiry notice</h2>\n      <p>Vehicle: <strong>3321323</strong></p>\n      <p>Category: Van</p>\n      <p>Location: Malkaduwawa</p>\n      <p>Expiry Type: revenue</p>\n      <p>Expiry Date: 2/5/2026</p>\n      <p><a href=\"http://localhost:3000\">Login to NSDS</a></p>\n    </div>\n  "
+  },
+  {
+    "id": "11da985a-3175-44fd-8a3b-15992148e517",
+    "sentAt": "2026-02-05T16:35:50.767Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (insurance)",
+    "body": "FAILED: No email provider configured (RESEND_API_KEY or SMTP_URL)"
+  },
+  {
+    "id": "f04e0ef7-7485-4ccf-89ba-18041dd24368",
+    "sentAt": "2026-02-05T16:35:50.760Z",
+    "to": "sandaruthsiriwardana@gmail.com",
+    "subject": "URGENT: Vehicle Expired Today - 3321323 (revenue)",
+    "body": "FAILED: No email provider configured (RESEND_API_KEY or SMTP_URL)"
+  }
+]

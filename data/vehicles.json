@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "d3282b41-ff86-48d4-a7bc-dff5247e104c",
+    "vehicleNumber": "3321323",
+    "category": "Van",
+    "location": "Malkaduwawa",
+    "revenueLicenseExpiry": "2026-02-05T00:00:00.000Z",
+    "insuranceExpiry": "2026-02-05T00:00:00.000Z",
+    "notes": null,
+    "createdAt": "2026-02-05T15:53:58.177Z",
+    "updatedAt": "2026-02-05T15:53:58.177Z"
+  }
+]

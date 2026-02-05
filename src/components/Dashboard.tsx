@@ -1,6 +1,8 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import VehicleForm from "./VehicleForm"
+import EmailLogs from "./EmailLogs"
+
 
 type Vehicle = {
   id: string
@@ -218,7 +220,9 @@ export default function Dashboard() {
         </div>
       )}
 
-
+      {/* Email Logs Panel */}
+      {/* @ts-ignore */}
+      <EmailLogs />
     </div>
   )
 }

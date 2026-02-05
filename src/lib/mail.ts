@@ -8,7 +8,7 @@ const resender = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null
 export async function sendExpiryEmail(to: string, subject: string, html: string) {
   if (resender) {
     await resender.emails.send({
-      from: "noreply@nsds.example.com",
+      from: "noreply@newsagarikadrivingschool.com",
       to,
       subject,
       html
@@ -24,7 +24,7 @@ export async function sendExpiryEmail(to: string, subject: string, html: string)
 
   const transporter = nodemailer.createTransport(smtpUrl)
   await transporter.sendMail({
-    from: "NSDS <noreply@nsds.example.com>",
+    from: `"NSDS" <newsagarikadrivingschoolm@gmail.com>`,
     to,
     subject,
     html
