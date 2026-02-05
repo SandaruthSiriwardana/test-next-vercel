@@ -1,35 +1,52 @@
 [
   {
-    "id": "e9c9d819-e952-4e2a-ade7-0f82ef34e2f6",
-    "vehicleNumber": "abc-1234",
-    "category": "Van",
-    "location": "Malkaduwawa",
+    "id": "test-0-today",
+    "vehicleNumber": "TEST-000 (Today)",
+    "category": "Test",
+    "location": "Test Lab",
     "revenueLicenseExpiry": "2026-02-06T00:00:00.000Z",
     "insuranceExpiry": "2026-02-06T00:00:00.000Z",
-    "notes": null,
-    "createdAt": "2026-02-05T19:34:14.136Z",
-    "updatedAt": "2026-02-05T19:34:14.136Z"
+    "createdAt": "2026-02-06T04:13:00.000Z",
+    "updatedAt": "2026-02-05T22:54:07.803Z"
   },
   {
-    "id": "d3282b41-ff86-48d4-a7bc-dff5247e104c",
-    "vehicleNumber": "3321323",
-    "category": "Van",
-    "location": "Malkaduwawa",
-    "revenueLicenseExpiry": "2026-02-05T00:00:00.000Z",
-    "insuranceExpiry": "2026-02-05T00:00:00.000Z",
-    "notes": null,
-    "createdAt": "2026-02-05T15:53:58.177Z",
-    "updatedAt": "2026-02-05T15:53:58.177Z"
-  },
-  {
-    "id": "test-vehicle-cron-tomorrow",
-    "vehicleNumber": "TEST-TOMORROW",
-    "category": "Car",
-    "location": "Test Location",
+    "id": "test-1-tomorrow",
+    "vehicleNumber": "TEST-001 (Tomorrow)",
+    "category": "Test",
+    "location": "Test Lab",
     "revenueLicenseExpiry": "2026-02-07T00:00:00.000Z",
-    "insuranceExpiry": "2026-02-07T00:00:00.000Z",
-    "notes": "Added for cron testing",
-    "createdAt": "2026-02-06T12:00:00.000Z",
-    "updatedAt": "2026-02-06T12:00:00.000Z"
+    "insuranceExpiry": "2027-02-07T00:00:00.000Z",
+    "createdAt": "2026-02-06T04:13:00.000Z",
+    "updatedAt": "2026-02-06T04:13:00.000Z"
+  },
+  {
+    "id": "test-7-week",
+    "vehicleNumber": "TEST-007 (Next Week)",
+    "category": "Test",
+    "location": "Test Lab",
+    "revenueLicenseExpiry": "2026-02-13T00:00:00.000Z",
+    "insuranceExpiry": "2027-02-13T00:00:00.000Z",
+    "createdAt": "2026-02-06T04:13:00.000Z",
+    "updatedAt": "2026-02-06T04:13:00.000Z"
+  },
+  {
+    "id": "test-30-month",
+    "vehicleNumber": "TEST-030 (Next Month)",
+    "category": "Test",
+    "location": "Test Lab",
+    "revenueLicenseExpiry": "2026-03-08T00:00:00.000Z",
+    "insuranceExpiry": "2027-03-08T00:00:00.000Z",
+    "createdAt": "2026-02-06T04:13:00.000Z",
+    "updatedAt": "2026-02-06T04:13:00.000Z"
+  },
+  {
+    "id": "test-90-months",
+    "vehicleNumber": "TEST-090 (3 Months)",
+    "category": "Test",
+    "location": "Test Lab",
+    "revenueLicenseExpiry": "2026-05-07T00:00:00.000Z",
+    "insuranceExpiry": "2027-05-07T00:00:00.000Z",
+    "createdAt": "2026-02-06T04:13:00.000Z",
+    "updatedAt": "2026-02-06T04:13:00.000Z"
   }
 ]

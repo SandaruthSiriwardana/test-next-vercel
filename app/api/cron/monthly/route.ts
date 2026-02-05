@@ -36,9 +36,8 @@ export async function POST(req: Request) {
 
   const lines = vehicles.map(v => `- ${v.vehicleNumber} | ${v.category} | ${v.location} | R:${v.revenueLicenseExpiry.toISOString().slice(0, 10)} I:${v.insuranceExpiry.toISOString().slice(0, 10)}`)
   const body = `<h3>Monthly expiry summary</h3><pre>${lines.join('\n')}</pre>`
-  const to = process.env.ADMIN_EMAIL || 'admin@example.com'
+  const to = 'sandaruthsiriwardana@gmail.com'
   await sendExpiryEmail(to, 'Monthly expiry summary', body)
-  await prisma.emailLog.create({ data: { to, subject: 'Monthly expiry summary', body } })
 
   return NextResponse.json({ ok: true, count: vehicles.length })
 }

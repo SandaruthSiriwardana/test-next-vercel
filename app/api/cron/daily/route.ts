@@ -111,7 +111,7 @@ export async function POST(req: Request) {
           }
 
           if (match) {
-            let to = process.env.ADMIN_EMAIL || 'newsagarikadrivingschoolm@gmail.com'
+            let to = 'sandaruthsiriwardana@gmail.com'
             let subject = `Expiry reminder: ${v.vehicleNumber} - ${c.type} (${Math.round(t / oneDay / 1000 / 3600 / 24)} days remaining)`
 
             if (t === 0) {
@@ -124,19 +124,8 @@ export async function POST(req: Request) {
               console.log(`[Cron] Sending email to ${to} for vehicle ${v.vehicleNumber}...`)
               await sendExpiryEmail(to, subject, html)
               console.log(`[Cron] Email sent successfully to ${to}`)
-              try {
-                await prisma.emailLog.create({ data: { to, subject, body: html } })
-              } catch {
-                await store.addEmailLog({ to, subject, body: html })
-              }
             } catch (err: any) {
               console.error(`[Cron] Failed to send email to ${to}:`, err)
-              const body = `FAILED: ${String(err?.message || err)}`
-              try {
-                await prisma.emailLog.create({ data: { to, subject, body } })
-              } catch {
-                await store.addEmailLog({ to, subject, body })
-              }
             }
           }
         }

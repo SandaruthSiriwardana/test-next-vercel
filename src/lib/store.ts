@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 const DATA_DIR = path.join(process.cwd(), 'data')
 const VEH_FILE = path.join(DATA_DIR, 'vehicles.json')
-const EMAIL_FILE = path.join(DATA_DIR, 'emailLogs.json')
+
 
 // If the runtime filesystem is read-only (serverless), fall back to an in-memory store.
 let USE_FS = true
@@ -13,7 +13,7 @@ try {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR)
   // Try touching the files if absent
   if (!fs.existsSync(VEH_FILE)) fs.writeFileSync(VEH_FILE, '[]')
-  if (!fs.existsSync(EMAIL_FILE)) fs.writeFileSync(EMAIL_FILE, '[]')
+
   // verify we can write a temp file
   const tmp = path.join(DATA_DIR, '.writetest')
   fs.writeFileSync(tmp, 'ok')
@@ -24,14 +24,13 @@ try {
 
 // In-memory caches used when filesystem is not writable.
 let vehiclesCache: any[] | null = null
-let emailLogsCache: any[] | null = null
 
 function ensure() {
   // noop when FS not available
   if (!USE_FS) return
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR)
   if (!fs.existsSync(VEH_FILE)) fs.writeFileSync(VEH_FILE, '[]')
-  if (!fs.existsSync(EMAIL_FILE)) fs.writeFileSync(EMAIL_FILE, '[]')
+
 }
 
 export type Vehicle = {
@@ -119,47 +118,4 @@ export async function deleteVehicle(id: string): Promise<boolean> {
   return true
 }
 
-export type EmailLog = { id: string; to: string; subject: string; body: string; sentAt: string }
 
-export async function addEmailLog(entry: Omit<EmailLog, 'id' | 'sentAt'>) {
-  ensure()
-  let all: EmailLog[]
-  if (!USE_FS) {
-    if (emailLogsCache === null) {
-      try {
-        all = JSON.parse(await fs.promises.readFile(EMAIL_FILE, 'utf-8')) as EmailLog[]
-      } catch (err) {
-        all = []
-      }
-    } else {
-      all = emailLogsCache
-    }
-  } else {
-    all = JSON.parse(await fs.promises.readFile(EMAIL_FILE, 'utf-8')) as EmailLog[]
-  }
-  const e: EmailLog = { id: uuidv4(), sentAt: new Date().toISOString(), ...entry }
-  all.unshift(e)
-  if (USE_FS) {
-    await fs.promises.writeFile(EMAIL_FILE, JSON.stringify(all, null, 2))
-  } else {
-    emailLogsCache = all
-  }
-  return e
-}
-
-export async function getEmailLogs(): Promise<EmailLog[]> {
-  ensure()
-  if (!USE_FS) {
-    if (emailLogsCache === null) {
-      try {
-        const txt = await fs.promises.readFile(EMAIL_FILE, 'utf-8')
-        emailLogsCache = JSON.parse(txt)
-      } catch (err) {
-        emailLogsCache = []
-      }
-    }
-    return (emailLogsCache ?? []) as EmailLog[]
-  }
-  const txt = await fs.promises.readFile(EMAIL_FILE, 'utf-8')
-  return JSON.parse(txt) as EmailLog[]
-}

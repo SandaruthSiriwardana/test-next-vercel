@@ -4,86 +4,46 @@ A comprehensive system for managing vehicle revenue licenses and insurance expir
 
 ## Features
 
-- **Dashboard**: 
-  - View all vehicles and their expiry statuses at a glance.
-  - Color-coded indicators (Green = Safe, Yellow = Warning, Red = Expired).
-  - Add, Edit, and Delete vehicle records.
-- **Automated Notifications**:
-  - Daily Cron Job checks for expired vehicles.
-  - Sends email alerts to the administrator for:
-    - Imminent expiries (90, 30, 7, 1 days remaining).
-    - Expired items (0 days / Today).
-- **Responsive UI**:
-  - Dark mode design inspired by modern development tools.
-  - Fully responsive for Mobile, Tablet, and Desktop.
+-   **Interactive Dashboard**:
+    -   **One-Click Filtering**: Instantly filter by "Today", "This Month", or "Total" via interactive stats panels.
+    -   **Smart Views**: Automatically highlights *exactly* which document (Revenue or Insurance) is expiring.
+    -   **Premium UI**: Features `Inter` typography, smooth animations, and clean dark mode aesthetics.
+    -   **Real-time Feedback**: Beautiful toast notifications for all actions.
 
-## Tech Stack
+-   **Automated Notifications**:
+    -   **Daily Cron Job**: Checks for expired vehicles every day at 20:30 UTC.
+    -   **Smart Alerts**: Sends emails for imminent expiries (90, 30, 7, 1 days) and immediate expiries.
+    -   **Monthly Summaries**: detailed monthly report of all upcoming expiries.
 
-- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Database**: PrismaORM (Supports PostgreSQL / SQLite)
-- **Deployment**: [Vercel](https://vercel.com/)
-- **Email**: Resend (with SMTP fallback)
+-   **Tech Excellence**:
+    -   **Framework**: Next.js 14 (App Router)
+    -   **Database**: PostgreSQL / PrismaORM
+    -   **Styling**: Tailwind CSS + Framer Motion
+    -   **Deployment**: Vercel Serverless
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18+ installed.
-- A Vercel account (for deployment).
-
-### Local Development
-
-1.  **Clone the repository**:
+1.  **Clone & Install**:
     ```bash
     git clone https://github.com/SandaruthSiriwardana/test-next-vercel.git
     cd test-next-vercel
+    npm install
     ```
 
-2.  **Install dependencies**:
-    ```bash
-    npm install --legacy-peer-deps
-    ```
-
-3.  **Configure Environment Variables**:
-    Copy `.env.example` to `.env.local` and set the following:
-    ```env
-    # Database
-    DATABASE_URL="postgresql://..." # Or use local SQLite for dev
-
-    # Email (Resend Recommended)
-    RESEND_API_KEY="re_..."
-    ADMIN_EMAIL="your-email@example.com"
-    
-    # Cron Security
-    CRON_SECRET="your_random_secret_string"
-    ```
-
-4.  **Run the development server**:
+2.  **Run Locally**:
     ```bash
     npm run dev
     ```
-    Open [http://localhost:3000](http://localhost:3000) in your browser.
+    Visit [http://localhost:3000](http://localhost:3000).
+
+3.  **Test Email**:
+    -   Click the "Test Email" button on the dashboard to verify your email configuration locally.
 
 ## Deployment on Vercel
 
-1.  **Push to GitHub**: Ensure your code is pushed to your repository.
-2.  **Import to Vercel**: Connect your GitHub repo in Vercel.
-3.  **Environment Variables**: Add the variables from your `.env.local` to the Project Settings > Environment Variables.
-4.  **Cron Jobs**:
-     - The cron schedule is defined in `vercel.json`.
-     - Vercel automatically detects this configuration upon deployment.
-     - **Default Schedule**: Daily at 02:00 AM Sri Lanka Time (`30 20 * * *` UTC).
+The project is optimized for Vercel.
+-   **Cron Jobs**: Automatically configured via `vercel.json`.
+-   **Environment**: ensuring `DATABASE_URL` and `RESEND_API_KEY` are set in Vercel Project Settings.
 
-## Troubleshooting Emails
-
-If emails are not sending:
-1.  Check the **Vercel Function Logs** for `api/cron/daily`.
-2.  Verify `RESEND_API_KEY` or SMTP settings are correct.
-3.  Ensure the **Cron Job** ran successfully (Status 200).
-4.  Check Spam/Junk folders.
-
-## Credits
-
-Developed by **Sandaruth Siriwardana**.
-Version 0.1.0
+---
+**Version 1.0.0** | Developed by Sandaruth Siriwardana
