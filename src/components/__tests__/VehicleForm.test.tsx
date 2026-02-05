@@ -22,7 +22,7 @@ describe('VehicleForm', () => {
     const onSaved = jest.fn()
     render(<VehicleForm onSaved={onSaved} />)
 
-    await userEvent.type(screen.getByLabelText(/Vehicle number/i), 'ABC-123')
+    await userEvent.type(screen.getByLabelText(/වාහන අංකය/i), 'ABC-123')
     await userEvent.click(screen.getByRole('button', { name: /save/i }))
 
     await waitFor(() => expect(onSaved).toHaveBeenCalled())

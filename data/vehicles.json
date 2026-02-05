@@ -1,13 +1,1 @@
-[
-  {
-    "id": "01425869-53ab-4be9-8a78-1a9ed0bb62a6",
-    "vehicleNumber": "abc-1234",
-    "category": "Custom",
-    "location": "Polpithigama",
-    "revenueLicenseExpiry": "2026-04-23T00:00:00.000Z",
-    "insuranceExpiry": "2026-02-28T00:00:00.000Z",
-    "notes": null,
-    "createdAt": "2026-02-05T11:34:39.084Z",
-    "updatedAt": "2026-02-05T12:20:46.293Z"
-  }
-]
+[]
