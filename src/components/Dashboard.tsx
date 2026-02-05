@@ -104,14 +104,14 @@ export default function Dashboard() {
       )}
 
       <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">Total vehicles<br /><strong className="text-2xl text-white">{vehicles.length}</strong></div>
-        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">Expiring this month<br /><strong className="text-2xl text-white">{expThisMonth.length}</strong></div>
-        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">Today<br /><strong className="text-2xl text-white">{vehicles.filter(v => new Date(v.revenueLicenseExpiry).toDateString() === new Date().toDateString() || new Date(v.insuranceExpiry).toDateString() === new Date().toDateString()).length}</strong></div>
+        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">මුළු වාහන<br /><strong className="text-2xl text-white">{vehicles.length}</strong></div>
+        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">මෙම මාසයේ කල් ඉකුත් වන<br /><strong className="text-2xl text-white">{expThisMonth.length}</strong></div>
+        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">අද<br /><strong className="text-2xl text-white">{vehicles.filter(v => new Date(v.revenueLicenseExpiry).toDateString() === new Date().toDateString() || new Date(v.insuranceExpiry).toDateString() === new Date().toDateString()).length}</strong></div>
       </section>
 
       <section className="bg-[#161b22] rounded-md border border-[#30363d] shadow-sm overflow-hidden">
         <div className="p-4 border-b border-[#30363d]">
-          <h2 className="font-semibold text-gray-100 text-lg">Vehicles</h2>
+          <h2 className="font-semibold text-gray-100 text-lg">වාහන ලැයිස්තුව</h2>
         </div>
 
         {/* Mobile: stacked cards */}
@@ -145,11 +145,11 @@ export default function Dashboard() {
 
                 <div className="grid grid-cols-2 gap-4 pt-3 border-t border-[#21262d]">
                   <div>
-                    <div className={labelCls}>Revenue Lic.</div>
+                    <div className={labelCls}>ආදායම් බලපත්‍රය</div>
                     <div className={`font-medium text-sm ${cls(rDiff)}`}>{formatDate(v.revenueLicenseExpiry)}</div>
                   </div>
                   <div className="text-right">
-                    <div className={labelCls}>Insurance</div>
+                    <div className={labelCls}>රක්ෂණය</div>
                     <div className={`font-medium text-sm ${cls(iDiff)}`}>{formatDate(v.insuranceExpiry)}</div>
                   </div>
                 </div>
@@ -163,12 +163,11 @@ export default function Dashboard() {
           <table className="w-full table-auto min-w-[640px] text-left border-collapse">
             <thead>
               <tr className="bg-[#21262d] border-b border-[#30363d] text-gray-300 text-sm">
-                <th className="px-4 py-3 font-semibold">Vehicle</th>
-                <th className="px-4 py-3 font-semibold">Category</th>
-                <th className="px-4 py-3 font-semibold">Location</th>
-                <th className="px-4 py-3 font-semibold">Revenue Expiry</th>
-                <th className="px-4 py-3 font-semibold">Insurance Expiry</th>
-                <th className="px-4 py-3 font-semibold text-right">Actions</th>
+                <th className="px-4 py-3 font-semibold">වාහනය</th>
+                <th className="px-4 py-3 font-semibold">වර්ගය</th>
+                <th className="px-4 py-3 font-semibold">ස්ථානය</th>
+                <th className="px-4 py-3 font-semibold">ආදායම් බලපත්‍රය</th>
+                <th className="px-4 py-3 font-semibold">රක්ෂණය</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#21262d]">
@@ -206,8 +205,8 @@ export default function Dashboard() {
       {deleteId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
           <div className="bg-[#161b22] border border-[#30363d] rounded-lg shadow-xl max-w-sm w-full p-6 animate-in zoom-in-95 duration-200">
-            <h3 className="text-lg font-bold text-gray-100 mb-2">Confirm Deletion</h3>
-            <p className="text-gray-400 mb-6">Are you sure you want to delete this vehicle? This action cannot be undone.</p>
+            <h3 className="text-lg font-bold text-gray-100 mb-2">මකා දැමීම තහවුරු කරන්න</h3>
+            <p className="text-gray-400 mb-6">ඔබට මෙම වාහනය මකා දැමීමට අවශ්‍ය බව විශ්වාසද? මෙය නැවත හැරවිය නොහැක.</p>
             <div className="flex justify-end gap-3">
               <button
                 onClick={() => setDeleteId(null)}
@@ -227,9 +226,9 @@ export default function Dashboard() {
       )}
 
       <section className="bg-[#161b22] rounded-md border border-[#30363d] p-4 shadow-sm">
-        <h2 className="font-semibold text-gray-100 mb-2">Recent email log</h2>
+        <h2 className="font-semibold text-gray-100 mb-2">මෑත ඊමේල් වාර්තා</h2>
         <ul className="text-sm space-y-1">
-          {logs.length === 0 && <li className="text-gray-500 italic">No email activity yet</li>}
+          {logs.length === 0 && <li className="text-gray-500 italic">තවම ඊමේල් ක්‍රියාකාරකම් නොමැත</li>}
           {logs.map(l => <li key={l.id} className="text-gray-400"><span className="text-gray-500">[{new Date(l.sentAt).toLocaleString()}]</span> — <span className="text-gray-300">{l.subject}</span></li>)}
         </ul>
       </section>

@@ -71,13 +71,13 @@ export default function VehicleForm({ onSaved, initialData }: Props) {
   return (
     <form onSubmit={submit} className="space-y-4 w-full" aria-live="polite">
       <div>
-        <label htmlFor="vehicleNumber" className={labelClass}>Vehicle number</label>
-        <input id="vehicleNumber" value={form.vehicleNumber} onChange={e => setForm({ ...form, vehicleNumber: e.target.value })} className={inputClass} placeholder="e.g. ABC-1234" />
+        <label htmlFor="vehicleNumber" className={labelClass}>වාහන අංකය</label>
+        <input id="vehicleNumber" value={form.vehicleNumber} onChange={e => setForm({ ...form, vehicleNumber: e.target.value })} className={inputClass} placeholder="උදා. ABC-1234" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="category" className={labelClass}>Category</label>
+          <label htmlFor="category" className={labelClass}>වර්ගය</label>
           <select id="category" value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} className={inputClass}>
             <option>Van</option>
             <option>Bike</option>
@@ -87,7 +87,7 @@ export default function VehicleForm({ onSaved, initialData }: Props) {
           </select>
         </div>
         <div>
-          <label htmlFor="location" className={labelClass}>Location</label>
+          <label htmlFor="location" className={labelClass}>ස්ථානය</label>
           <select id="location" value={form.location} onChange={e => setForm({ ...form, location: e.target.value })} className={inputClass}>
             <option>Malkaduwawa</option>
             <option>Alawwa</option>
@@ -99,11 +99,11 @@ export default function VehicleForm({ onSaved, initialData }: Props) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="revenueLicenseExpiry" className={labelClass}>Revenue License Exp.</label>
+          <label htmlFor="revenueLicenseExpiry" className={labelClass}>ආදායම් බලපත්‍ර කල් ඉකුත් වීම</label>
           <input id="revenueLicenseExpiry" type="date" value={form.revenueLicenseExpiry} onChange={e => setForm({ ...form, revenueLicenseExpiry: e.target.value })} className={inputClass} style={{ colorScheme: 'dark' }} />
         </div>
         <div>
-          <label htmlFor="insuranceExpiry" className={labelClass}>Insurance Expiry</label>
+          <label htmlFor="insuranceExpiry" className={labelClass}>රක්ෂණ කල් ඉකුත් වීම</label>
           <input id="insuranceExpiry" type="date" value={form.insuranceExpiry} onChange={e => setForm({ ...form, insuranceExpiry: e.target.value })} className={inputClass} style={{ colorScheme: 'dark' }} />
         </div>
       </div>
