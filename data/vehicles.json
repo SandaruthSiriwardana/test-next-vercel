@@ -1,57 +1,24 @@
 [
   {
-    "id": "11574b6b-68e2-4dbb-b746-855ee979081d",
-    "vehicleNumber": "hjjf",
+    "id": "273d0d0b-e380-459e-8486-4ab7f3984878",
+    "vehicleNumber": "124-ab",
     "category": "Van",
-    "location": "Malkaduwawa",
-    "revenueLicenseExpiry": "2026-02-15T00:00:00.000Z",
-    "insuranceExpiry": "2026-02-22T00:00:00.000Z",
-    "notes": null,
-    "createdAt": "2026-02-01T20:04:25.305Z",
-    "updatedAt": "2026-02-01T20:04:25.305Z"
-  },
-  {
-    "id": "70461b2f-ba40-4e92-9843-fd8f3bfee22b",
-    "vehicleNumber": "hjjf",
-    "category": "Van",
-    "location": "Malkaduwawa",
-    "revenueLicenseExpiry": "2026-02-14T00:00:00.000Z",
+    "location": "Alawwa",
+    "revenueLicenseExpiry": "2026-02-28T00:00:00.000Z",
     "insuranceExpiry": "2026-02-28T00:00:00.000Z",
     "notes": null,
-    "createdAt": "2026-02-01T20:02:10.712Z",
-    "updatedAt": "2026-02-01T20:02:10.712Z"
+    "createdAt": "2026-02-05T11:43:32.841Z",
+    "updatedAt": "2026-02-05T11:43:32.841Z"
   },
   {
-    "id": "2a50f332-cf76-4d2b-9f9c-53adc79eaf35",
-    "vehicleNumber": "12233",
-    "category": "Bike",
-    "location": "Alawwa",
-    "revenueLicenseExpiry": "2026-02-08T00:00:00.000Z",
-    "insuranceExpiry": "2026-02-02T00:00:00.000Z",
+    "id": "01425869-53ab-4be9-8a78-1a9ed0bb62a6",
+    "vehicleNumber": "abc-1234",
+    "category": "Custom",
+    "location": "Polpithigama",
+    "revenueLicenseExpiry": "2026-02-21T00:00:00.000Z",
+    "insuranceExpiry": "2026-02-28T00:00:00.000Z",
     "notes": null,
-    "createdAt": "2026-02-01T19:15:10.509Z",
-    "updatedAt": "2026-02-01T19:15:10.509Z"
-  },
-  {
-    "id": "43cae728-bca9-4267-a1b4-a8595b3686f3",
-    "vehicleNumber": "24244",
-    "category": "Bus",
-    "location": "Siyablagaskothuwa",
-    "revenueLicenseExpiry": "2026-02-19T00:00:00.000Z",
-    "insuranceExpiry": "2026-02-20T00:00:00.000Z",
-    "notes": null,
-    "createdAt": "2026-02-01T07:42:13.536Z",
-    "updatedAt": "2026-02-01T07:42:13.536Z"
-  },
-  {
-    "id": "0cd7d537-f354-400a-aff1-29ff370f26cb",
-    "vehicleNumber": "sccc",
-    "category": "Van",
-    "location": "Malkaduwawa",
-    "revenueLicenseExpiry": "2026-02-14T00:00:00.000Z",
-    "insuranceExpiry": "2026-02-20T00:00:00.000Z",
-    "notes": null,
-    "createdAt": "2026-02-01T07:28:58.243Z",
-    "updatedAt": "2026-02-01T07:28:58.243Z"
+    "createdAt": "2026-02-05T11:34:39.084Z",
+    "updatedAt": "2026-02-05T11:34:39.084Z"
   }
 ]

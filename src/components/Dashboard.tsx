@@ -24,8 +24,8 @@ export default function Dashboard() {
     try {
       const lres = await fetch('/api/email-logs')
       const ld = await lres.json()
-      setLogs(ld.slice(0,10))
-    } catch {}
+      setLogs(ld.slice(0, 10))
+    } catch { }
   }
 
   useEffect(() => { load() }, [])
@@ -43,7 +43,7 @@ export default function Dashboard() {
         <button
           onClick={() => setShowForm(s => !s)}
           aria-label={showForm ? 'Close add vehicle form' : 'Add vehicle'}
-          className="inline-flex items-center gap-2 px-3 py-2 bg-green-600 hover:bg-green-700 text-white font-medium text-sm rounded shadow"
+          className="inline-flex items-center gap-2 px-3 py-2 bg-[#238636] hover:bg-[#2ea043] text-white font-medium text-sm rounded-md shadow-sm border border-[rgba(240,246,252,0.1)] transition-colors"
         >
           {/* plus icon */}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4">
@@ -53,41 +53,51 @@ export default function Dashboard() {
         </button>
       </div>
       {showForm && (
-        <section className="bg-white rounded shadow p-4">
-          <h2 className="font-medium mb-2">Add vehicle</h2>
+        <section className="bg-[#161b22] rounded-md border border-[#30363d] p-4 shadow-sm">
+          <h2 className="font-semibold text-gray-100 mb-4">Add vehicle</h2>
           <VehicleForm onSaved={() => { setShowForm(false); load() }} />
         </section>
       )}
       <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-3 sm:p-4 bg-white rounded shadow">Total vehicles<br/><strong>{vehicles.length}</strong></div>
-        <div className="p-3 sm:p-4 bg-white rounded shadow">Expiring this month<br/><strong>{expThisMonth.length}</strong></div>
-        <div className="p-3 sm:p-4 bg-white rounded shadow">Today<br/><strong>{vehicles.filter(v=>new Date(v.revenueLicenseExpiry).toDateString()===new Date().toDateString()||new Date(v.insuranceExpiry).toDateString()===new Date().toDateString()).length}</strong></div>
+        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">Total vehicles<br /><strong className="text-2xl text-white">{vehicles.length}</strong></div>
+        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">Expiring this month<br /><strong className="text-2xl text-white">{expThisMonth.length}</strong></div>
+        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">Today<br /><strong className="text-2xl text-white">{vehicles.filter(v => new Date(v.revenueLicenseExpiry).toDateString() === new Date().toDateString() || new Date(v.insuranceExpiry).toDateString() === new Date().toDateString()).length}</strong></div>
       </section>
 
-      <section className="bg-white rounded shadow p-4">
-        <h2 className="font-medium mb-2">Vehicles</h2>
+      <section className="bg-[#161b22] rounded-md border border-[#30363d] shadow-sm overflow-hidden">
+        <div className="p-4 border-b border-[#30363d]">
+          <h2 className="font-semibold text-gray-100 text-lg">Vehicles</h2>
+        </div>
 
         {/* Mobile: stacked cards */}
-        <div className="space-y-3 sm:hidden">
+        <div className="space-y-3 sm:hidden p-4">
           {vehicles.map(v => {
             const now = Date.now()
             const rDiff = new Date(v.revenueLicenseExpiry).getTime() - now
             const iDiff = new Date(v.insuranceExpiry).getTime() - now
-            const cls = (d:number) => d < 0 ? 'text-red-400' : d < 7*24*3600*1000 ? 'text-orange-400' : d < 30*24*3600*1000 ? 'text-yellow-300' : 'text-green-300'
+            const cls = (d: number) => d < 0 ? 'text-[#ff7b72]' : d < 7 * 24 * 3600 * 1000 ? 'text-[#d29922]' : d < 30 * 24 * 3600 * 1000 ? 'text-[#eac54f]' : 'text-[#3fb950]'
+            const labelCls = "text-xs text-gray-400 font-medium uppercase tracking-wider mb-0.5"
             return (
-              <div key={v.id} className="p-3 bg-slate-900 rounded border border-slate-800">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="text-sm text-slate-400">{v.id.slice(0,6)}</div>
-                  <div className="text-xs text-slate-400">{v.location}</div>
-                </div>
-                <div className="flex items-baseline justify-between">
+              <div key={v.id} className="p-4 bg-[#0d1117] rounded-md border border-[#30363d] shadow-sm">
+                <div className="flex items-start justify-between mb-3">
                   <div>
-                    <div className="text-lg font-medium text-white">{v.vehicleNumber}</div>
-                    <div className="text-sm text-slate-300">{v.category}</div>
+                    <div className="text-xl font-bold text-white mb-1 tracking-tight">{v.vehicleNumber}</div>
+                    <div className="text-sm text-gray-400 flex items-center gap-2">
+                      <span className="bg-[#21262d] px-2 py-0.5 rounded-full border border-[#30363d] text-xs text-gray-300">{v.category}</span>
+                      <span className="text-gray-600">•</span>
+                      <span>{v.location}</span>
+                    </div>
                   </div>
-                  <div className="text-right text-sm">
-                    <div className={`${cls(rDiff)}`}>R: {new Date(v.revenueLicenseExpiry).toLocaleDateString()}</div>
-                    <div className={`${cls(iDiff)}`}>I: {new Date(v.insuranceExpiry).toLocaleDateString()}</div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 pt-3 border-t border-[#21262d]">
+                  <div>
+                    <div className={labelCls}>Revenue Lic.</div>
+                    <div className={`font-medium text-sm ${cls(rDiff)}`}>{new Date(v.revenueLicenseExpiry).toLocaleDateString()}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className={labelCls}>Insurance</div>
+                    <div className={`font-medium text-sm ${cls(iDiff)}`}>{new Date(v.insuranceExpiry).toLocaleDateString()}</div>
                   </div>
                 </div>
               </div>
@@ -97,31 +107,29 @@ export default function Dashboard() {
 
         {/* Desktop/tablet: table view */}
         <div className="hidden sm:block overflow-x-auto">
-          <table className="w-full table-auto min-w-[640px]">
+          <table className="w-full table-auto min-w-[640px] text-left border-collapse">
             <thead>
-              <tr className="text-left">
-                <th className="p-2">#</th>
-                <th className="p-2">Vehicle</th>
-                <th className="p-2">Category</th>
-                <th className="p-2">Location</th>
-                <th className="p-2">Revenue Expiry</th>
-                <th className="p-2">Insurance Expiry</th>
+              <tr className="bg-[#21262d] border-b border-[#30363d] text-gray-300 text-sm">
+                <th className="px-4 py-3 font-semibold">Vehicle</th>
+                <th className="px-4 py-3 font-semibold">Category</th>
+                <th className="px-4 py-3 font-semibold">Location</th>
+                <th className="px-4 py-3 font-semibold">Revenue Expiry</th>
+                <th className="px-4 py-3 font-semibold">Insurance Expiry</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-[#21262d]">
               {vehicles.map(v => {
                 const now = Date.now()
                 const rDiff = new Date(v.revenueLicenseExpiry).getTime() - now
                 const iDiff = new Date(v.insuranceExpiry).getTime() - now
-                const cls = (d:number) => d < 0 ? 'text-red-600' : d < 7*24*3600*1000 ? 'text-orange-600' : d < 30*24*3600*1000 ? 'text-yellow-700' : 'text-green-600'
+                const cls = (d: number) => d < 0 ? 'text-[#ff7b72] font-semibold' : d < 7 * 24 * 3600 * 1000 ? 'text-[#d29922] font-medium' : d < 30 * 24 * 3600 * 1000 ? 'text-[#eac54f]' : 'text-[#3fb950]'
                 return (
-                  <tr key={v.id} className="border-t">
-                    <td className="p-2">{v.id.slice(0,6)}</td>
-                    <td className="p-2">{v.vehicleNumber}</td>
-                    <td className="p-2">{v.category}</td>
-                    <td className="p-2">{v.location}</td>
-                    <td className={`p-2 ${cls(rDiff)}`}>{new Date(v.revenueLicenseExpiry).toLocaleDateString()}</td>
-                    <td className={`p-2 ${cls(iDiff)}`}>{new Date(v.insuranceExpiry).toLocaleDateString()}</td>
+                  <tr key={v.id} className="hover:bg-[#21262d] transition-colors group">
+                    <td className="px-4 py-3 font-medium text-gray-100 group-hover:text-white">{v.vehicleNumber}</td>
+                    <td className="px-4 py-3 text-gray-400">{v.category}</td>
+                    <td className="px-4 py-3 text-gray-400">{v.location}</td>
+                    <td className={`px-4 py-3 ${cls(rDiff)}`}>{new Date(v.revenueLicenseExpiry).toLocaleDateString()}</td>
+                    <td className={`px-4 py-3 ${cls(iDiff)}`}>{new Date(v.insuranceExpiry).toLocaleDateString()}</td>
                   </tr>
                 )
               })}
@@ -130,11 +138,11 @@ export default function Dashboard() {
         </div>
       </section>
 
-      <section className="bg-white rounded shadow p-4">
-        <h2 className="font-medium mb-2">Recent email log</h2>
-        <ul className="text-sm">
-          {logs.length === 0 && <li className="text-gray-500">No email activity yet</li>}
-          {logs.map(l => <li key={l.id}>{new Date(l.sentAt).toLocaleString()} — {l.subject}</li>)}
+      <section className="bg-[#161b22] rounded-md border border-[#30363d] p-4 shadow-sm">
+        <h2 className="font-semibold text-gray-100 mb-2">Recent email log</h2>
+        <ul className="text-sm space-y-1">
+          {logs.length === 0 && <li className="text-gray-500 italic">No email activity yet</li>}
+          {logs.map(l => <li key={l.id} className="text-gray-400"><span className="text-gray-500">[{new Date(l.sentAt).toLocaleString()}]</span> — <span className="text-gray-300">{l.subject}</span></li>)}
         </ul>
       </section>
     </div>
