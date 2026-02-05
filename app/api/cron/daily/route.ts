@@ -73,7 +73,10 @@ export async function POST(req: Request) {
       })
     }
 
+    console.log(`[Cron] Database/Store retrieval complete. Found ${vehicles.length} vehicles.`)
+
     for (const v of vehicles) {
+      // console.log(`[Cron] Checking vehicle ${v.vehicleNumber}...`) 
       const checks = [
         { type: 'revenue', date: v.revenueLicenseExpiry },
         { type: 'insurance', date: v.insuranceExpiry }
@@ -81,6 +84,9 @@ export async function POST(req: Request) {
       for (const c of checks) {
         const expiryDate = new Date(c.date)
         const diff = expiryDate.getTime() - now.getTime()
+
+        // Log dates for debugging (only for the first vehicle or if match found)
+        // console.log(`[Cron] ${v.vehicleNumber} ${c.type}: expiry=${expiryDate.toISOString()}, now=${now.toISOString()}, diff=${diff}`)
 
         for (const t of targets) {
           let match = false
@@ -92,9 +98,16 @@ export async function POST(req: Request) {
             const slNowStr = slNow.toISOString().split('T')[0]
             const expiryStr = expiryDate.toISOString().split('T')[0]
 
+            // VERBOSE LOGGING FOR DEBUGGING
+            if (vehicles.length < 5) {
+              console.log(`[Cron] Checking "Today" (0 days): Expiry=${expiryStr} vs SL_Today=${slNowStr} (Match? ${expiryStr === slNowStr})`)
+            }
+
             if (expiryStr === slNowStr) match = true
           } else {
+            // ... other logic
             if (Math.abs(diff - t) < (oneDay / 2)) match = true
+            // if (match) console.log(`[Cron] Match found for ${v.vehicleNumber} ${c.type} at target ${t} (diff=${diff})`)
           }
 
           if (match) {
