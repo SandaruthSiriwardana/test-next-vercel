@@ -2,6 +2,14 @@ import { NextResponse } from 'next/server'
 import { sendExpiryEmail, renderVehicleExpiryTemplate } from '../../../../src/lib/mail'
 
 function authorized(req: Request) {
+  // Vercel cron jobs send x-vercel-cron: 1
+  const vercelCron = req.headers.get('x-vercel-cron')
+  if (vercelCron === '1') {
+    console.log('[Cron] Authorized via Vercel cron header')
+    return true
+  }
+
+  // Fallback for manual testing with secret
   const secret = process.env.CRON_SECRET
   const h = req.headers.get('x-cron-secret')
   console.log(`[Cron] Auth check - Header: ${h ? 'Found' : 'Missing'}, Config: ${secret ? 'Set' : 'Unset'}`)

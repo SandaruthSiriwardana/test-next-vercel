@@ -14,7 +14,7 @@ export async function sendExpiryEmail(to: string, subject: string, html: string)
       html
     })
     // Log via filesystem store when prisma isn't used
-    try { await import('./store').then(m => m.addEmailLog({ to, subject, body: html })) } catch {}
+    try { await import('./store').then(m => m.addEmailLog({ to, subject, body: html })) } catch { }
     return
   }
 
@@ -22,14 +22,23 @@ export async function sendExpiryEmail(to: string, subject: string, html: string)
   const smtpUrl = process.env.SMTP_URL
   if (!smtpUrl) throw new Error("No email provider configured (RESEND_API_KEY or SMTP_URL)")
 
-  const transporter = nodemailer.createTransport(smtpUrl)
+  // Explicit Gmail configuration for better compatibility
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'newsagarikadrivingschoolm@gmail.com',
+      pass: process.env.GMAIL_APP_PASSWORD || smtpUrl.split(':')[2]?.split('@')[0] || ''
+    }
+  })
   await transporter.sendMail({
     from: `"NSDS" <newsagarikadrivingschoolm@gmail.com>`,
     to,
     subject,
     html
   })
-  try { await import('./store').then(m => m.addEmailLog({ to, subject, body: html })) } catch {}
+  try { await import('./store').then(m => m.addEmailLog({ to, subject, body: html })) } catch { }
 }
 
 export function renderVehicleExpiryTemplate(v: Vehicle, expiryType: string) {
@@ -42,7 +51,7 @@ export function renderVehicleExpiryTemplate(v: Vehicle, expiryType: string) {
       <p>Location: ${v.location}</p>
       <p>Expiry Type: ${expiryType}</p>
       <p>Expiry Date: ${new Date(expiryDate).toLocaleDateString()}</p>
-      <p><a href="${process.env.NEXTAUTH_URL || '#'}">Login to NSDS</a></p>
+      <p><a href="${process.env.NEXTAUTH_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '#')}">Login to NSDS</a></p>
     </div>
   `
 }
