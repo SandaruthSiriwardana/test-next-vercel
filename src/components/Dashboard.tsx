@@ -27,6 +27,8 @@ export default function Dashboard() {
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null)
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const [currentDate, setCurrentDate] = useState(new Date())
+  const [testEmailLoading, setTestEmailLoading] = useState(false)
+  const [testEmailStatus, setTestEmailStatus] = useState<string | null>(null)
 
   async function load() {
     const res = await fetch('/api/vehicles')
@@ -53,6 +55,31 @@ export default function Dashboard() {
       load()
     } catch (e) {
       alert('Failed to delete')
+    }
+  }
+
+  async function handleTestEmail() {
+    setTestEmailLoading(true)
+    setTestEmailStatus(null)
+    try {
+      const res = await fetch('/api/test-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      })
+      const data = await res.json()
+      if (data.success) {
+        setTestEmailStatus('✅ Test email sent successfully!')
+        setTimeout(() => setTestEmailStatus(null), 5000)
+      } else {
+        setTestEmailStatus(`❌ Failed: ${data.error}`)
+        setTimeout(() => setTestEmailStatus(null), 8000)
+      }
+    } catch (err) {
+      setTestEmailStatus('❌ Failed to send test email')
+      setTimeout(() => setTestEmailStatus(null), 5000)
+    } finally {
+      setTestEmailLoading(false)
     }
   }
 
@@ -98,19 +125,36 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="flex items-center justify-end">
-        <button
-          onClick={() => {
-            setEditingVehicle(null)
-            setShowForm(true)
-          }}
-          className="inline-flex items-center gap-2 px-3 py-2 font-medium text-sm rounded-md shadow-sm border border-[rgba(240,246,252,0.1)] transition-colors text-white bg-[#238636] hover:bg-[#2ea043]"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-          </svg>
-          <span>Add vehicle</span>
-        </button>
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        {testEmailStatus && (
+          <div className={`px-4 py-2 rounded-md text-sm font-medium ${testEmailStatus.includes('✅') ? 'bg-[#238636]/20 text-[#3fb950] border border-[#238636]' : 'bg-red-900/20 text-red-400 border border-red-800'}`}>
+            {testEmailStatus}
+          </div>
+        )}
+        <div className="flex items-center gap-3 ml-auto">
+          <button
+            onClick={handleTestEmail}
+            disabled={testEmailLoading}
+            className="inline-flex items-center gap-2 px-3 py-2 font-medium text-sm rounded-md shadow-sm border border-[rgba(240,246,252,0.1)] transition-colors text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span>{testEmailLoading ? 'Sending...' : 'Test Email'}</span>
+          </button>
+          <button
+            onClick={() => {
+              setEditingVehicle(null)
+              setShowForm(true)
+            }}
+            className="inline-flex items-center gap-2 px-3 py-2 font-medium text-sm rounded-md shadow-sm border border-[rgba(240,246,252,0.1)] transition-colors text-white bg-[#238636] hover:bg-[#2ea043]"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+            </svg>
+            <span>Add vehicle</span>
+          </button>
+        </div>
       </div>
 
       {showForm && (
