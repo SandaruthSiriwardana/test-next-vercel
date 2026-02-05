@@ -140,37 +140,10 @@ export default function Dashboard() {
         </div>
       )}
 
-      <section className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">මුළු වාහන<br /><strong className="text-2xl text-white">{vehicles.length}</strong></div>
         <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">මෙම මාසයේ කල් ඉකුත් වන<br /><strong className="text-2xl text-white">{expThisMonth.length}</strong></div>
         <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">අද<br /><strong className="text-2xl text-white">{vehicles.filter(v => new Date(v.revenueLicenseExpiry).toDateString() === new Date().toDateString() || new Date(v.insuranceExpiry).toDateString() === new Date().toDateString()).length}</strong></div>
-        <div className="p-4 bg-[#161b22] rounded-md border border-[#30363d] shadow-sm text-gray-300">
-          ඊළඟ මතක් කිරීම<br />
-          <strong className="text-lg text-white">
-            {(() => {
-              if (!currentDate) return "Loading..."
-              // Calculate next 02:25 AM SL time (Updated for testing)
-              const now = new Date(currentDate)
-              // Create a date object that has the SL time components
-              const slNow = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Colombo" }))
-
-              const target = new Date(slNow)
-              target.setHours(2, 18, 0, 0)
-
-              if (slNow > target) {
-                // It's past 02:25 AM today, so next is tomorrow
-                target.setDate(target.getDate() + 1)
-              }
-
-              const diff = target.getTime() - slNow.getTime()
-              const hours = Math.floor(diff / (1000 * 60 * 60))
-              const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-              const seconds = Math.floor((diff % (1000 * 60)) / 1000)
-
-              return `${hours}h ${minutes}m ${seconds}s`
-            })()}
-          </strong>
-        </div>
       </section>
 
       <section className="bg-[#161b22] rounded-md border border-[#30363d] shadow-sm overflow-hidden">
