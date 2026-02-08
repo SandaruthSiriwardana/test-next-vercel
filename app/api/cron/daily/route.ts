@@ -16,10 +16,19 @@ function authorized(req: Request) {
   return secret && h === secret
 }
 
+function slDateString(d: Date) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Colombo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(d)
+}
+
 // Keep all database calls inside the handler to avoid executing at build-time
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   try {
-    console.log(`[${new Date().toISOString()}] [Cron] Daily cron job POST request received.`)
+    console.log(`[${new Date().toISOString()}] [Cron] Daily cron job GET request received.`)
     if (!authorized(req)) {
       console.error(`[Cron] Unauthorized attempt at ${new Date().toISOString()}`)
       return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
@@ -92,18 +101,15 @@ export async function POST(req: Request) {
           let match = false
 
           if (t === 0) {
-            // Sri Lanka Time is UTC+5:30
-            // We want to check if the expiry date matches "today" in SL time
-            const slNow = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Colombo" }))
-            const slNowStr = slNow.toISOString().split('T')[0]
-            const expiryStr = expiryDate.toISOString().split('T')[0]
+            const slToday = slDateString(new Date())
+            const expirySL = slDateString(expiryDate)
 
             // VERBOSE LOGGING FOR DEBUGGING
             if (vehicles.length < 5) {
-              console.log(`[Cron] Checking "Today" (0 days): Expiry=${expiryStr} vs SL_Today=${slNowStr} (Match? ${expiryStr === slNowStr})`)
+              console.log(`[Cron] Checking "Today" (0 days): Expiry=${expirySL} vs SL_Today=${slToday} (Match? ${expirySL === slToday})`)
             }
 
-            if (expiryStr === slNowStr) match = true
+            if (expirySL === slToday) match = true
           } else {
             // ... other logic
             if (Math.abs(diff - t) < (oneDay / 2)) match = true

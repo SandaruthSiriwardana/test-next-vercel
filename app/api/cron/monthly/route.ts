@@ -15,7 +15,7 @@ function authorized(req: Request) {
   return secret && h === secret
 }
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   if (!authorized(req)) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
 
   // Send a monthly summary of expiries this month

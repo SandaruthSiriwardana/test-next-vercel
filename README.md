@@ -44,6 +44,16 @@ A comprehensive system for managing vehicle revenue licenses and insurance expir
 The project is optimized for Vercel.
 -   **Cron Jobs**: Automatically configured via `vercel.json`.
 -   **Environment**: ensuring `DATABASE_URL` and `RESEND_API_KEY` are set in Vercel Project Settings.
-
+---
+``{
+  "crons": [
+    {
+      "path": "/api/cron/daily",
+      "schedule": "30 4 * * *"
+    }
+  ]
+}``
+---
+10:00 AM LKT - 5:30 = 04:30 UTC
 ---
 **Version 1.0.0** | Developed by Sandaruth Siriwardana
